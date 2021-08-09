@@ -1,28 +1,35 @@
-package com.rahulp.ipldashboardserver.dto;
+package com.rahulp.ipldashboardserver.entity;
 
-public class MatchDTO {
+import java.time.LocalDate;
+
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
+@Entity
+public class MatchEntity {
 	
-	private String id;	
+	@Id
+	private Long matchId;	
 	private String city;	
-	private String date;
-	private String player_of_match;	
+	private LocalDate date;
+	private String playerOfMatch;	
 	private String venue;
 	private String team1;
 	private String team2;
-	private String toss_winner;
-	private String toss_decision;
-	private String winner;	
+	private String tossWinner;
+	private String tossDecision;
+	private String matchWinner;	
 	private String result;
 	private String result_margin;	
 	private String method;	
 	private String umpire1;	
 	private String umpire2;
 	
-	public String getId() {
-		return id;
+	public Long getMatchId() {
+		return matchId;
 	}
-	public void setId(String id) {
-		this.id = id;
+	public void setMatchId(Long matchId) {
+		this.matchId = matchId;
 	}
 	public String getCity() {
 		return city;
@@ -30,17 +37,17 @@ public class MatchDTO {
 	public void setCity(String city) {
 		this.city = city;
 	}
-	public String getDate() {
+	public LocalDate getDate() {
 		return date;
 	}
-	public void setDate(String date) {
+	public void setDate(LocalDate date) {
 		this.date = date;
 	}
-	public String getPlayer_of_match() {
-		return player_of_match;
+	public String getPlayerOfMatch() {
+		return playerOfMatch;
 	}
-	public void setPlayer_of_match(String player_of_match) {
-		this.player_of_match = player_of_match;
+	public void setPlayerOfMatch(String playerOfMatch) {
+		this.playerOfMatch = playerOfMatch;
 	}
 	public String getVenue() {
 		return venue;
@@ -60,23 +67,23 @@ public class MatchDTO {
 	public void setTeam2(String team2) {
 		this.team2 = team2;
 	}
-	public String getToss_winner() {
-		return toss_winner;
+	public String getTossWinner() {
+		return tossWinner;
 	}
-	public void setToss_winner(String toss_winner) {
-		this.toss_winner = toss_winner;
+	public void setTossWinner(String tossWinner) {
+		this.tossWinner = tossWinner;
 	}
-	public String getToss_decision() {
-		return toss_decision;
+	public String getTossDecision() {
+		return tossDecision;
 	}
-	public void setToss_decision(String toss_decision) {
-		this.toss_decision = toss_decision;
+	public void setTossDecision(String tossDecision) {
+		this.tossDecision = tossDecision;
 	}
-	public String getWinner() {
-		return winner;
+	public String getMatchWinner() {
+		return matchWinner;
 	}
-	public void setWinner(String winner) {
-		this.winner = winner;
+	public void setMatchWinner(String matchWinner) {
+		this.matchWinner = matchWinner;
 	}
 	public String getResult() {
 		return result;
@@ -108,6 +115,5 @@ public class MatchDTO {
 	public void setUmpire2(String umpire2) {
 		this.umpire2 = umpire2;
 	}
-	
-	
+
 }
