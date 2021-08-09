@@ -20,7 +20,7 @@ public class MatchEntity {
 	private String tossDecision;
 	private String matchWinner;	
 	private String result;
-	private String result_margin;	
+	private String resultMargin;	
 	private String method;	
 	private String umpire1;	
 	private String umpire2;
@@ -91,11 +91,11 @@ public class MatchEntity {
 	public void setResult(String result) {
 		this.result = result;
 	}
-	public String getResult_margin() {
-		return result_margin;
+	public String getResultMargin() {
+		return resultMargin;
 	}
-	public void setResult_margin(String result_margin) {
-		this.result_margin = result_margin;
+	public void setResultMargin(String resultMargin) {
+		this.resultMargin = resultMargin;
 	}
 	public String getMethod() {
 		return method;
