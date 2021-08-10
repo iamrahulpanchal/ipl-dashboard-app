@@ -32,7 +32,7 @@ public class MatchDataProcessor implements ItemProcessor<MatchDTO, MatchEntity> 
 		matchEntity.setVenue(matchDTO.getVenue());
 		
 		// Set team1 to FirstInnings Team & team2 to SecondInnings Team
-		String tossWinner = matchDTO.getWinner();
+		String tossWinner = matchDTO.getToss_winner();
 		String tossDecision = matchDTO.getToss_decision();
 		String team1 = matchDTO.getTeam1();
 		String team2 = matchDTO.getTeam2();
@@ -47,6 +47,7 @@ public class MatchDataProcessor implements ItemProcessor<MatchDTO, MatchEntity> 
 			} else {
 				secondInningsTeam = team1;
 			}
+			
 		} else {
 			if(tossWinner.equals(team1)) {
 				firstInningsTeam = team2;
