@@ -1,6 +1,8 @@
 package com.rahulp.ipldashboardserver.batchprocessing;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -30,12 +32,20 @@ public class JobCompletionNotificationListener extends JobExecutionListenerSuppo
 		    if(jobExecution.getStatus() == BatchStatus.COMPLETED) {
 			      log.info("!!! JOB FINISHED! Time to verify the results");
 
-			      Query distinctTeamQuery = em.createQuery("SELECT DISTINCT(m.team1) FROM MatchEntity m");
+			      Query distinctTeam1Query = em.createQuery("SELECT DISTINCT(m.team1) FROM MatchEntity m");
+			      Query distinctTeam2Query = em.createQuery("SELECT DISTINCT(m.team2) FROM MatchEntity m");
 			      
 			      @SuppressWarnings("unchecked")
-			      List<String> teamsList = distinctTeamQuery.getResultList();
+			      List<String> team1List = distinctTeam1Query.getResultList();
+			      @SuppressWarnings("unchecked")
+			      List<String> team2List = distinctTeam2Query.getResultList();
+			      
+			      Set<String> teamsList = new HashSet<>();
+			      teamsList.addAll(team1List);
+			      teamsList.addAll(team2List);
 			      
 			      for(String teamVal: teamsList) {
+					  
 			    	  Query totalMatchesQuery = em.createQuery("SELECT count(m) FROM MatchEntity m where m.team1 = :team OR m.team2 = :team");
 			    	  totalMatchesQuery.setParameter("team", teamVal);
 			    	  Long totalMatches = (Long) totalMatchesQuery.getSingleResult();
@@ -58,16 +68,11 @@ public class JobCompletionNotificationListener extends JobExecutionListenerSuppo
 			    	  team.setNoResult(noResult);
 			    	  
 			    	  em.persist(team);
+			    	  
+			    	  // Overriden toString() of TeamEntity
+			    	  log.info(team + "");
 			      }
 			      
-			      Query teams = em.createQuery("SELECT t FROM TeamEntity t");
-			      
-			      @SuppressWarnings("unchecked")
-			      List<TeamEntity> teamsTable = teams.getResultList();
-			      
-			      for(TeamEntity t: teamsTable) {
-			    	  log.info(t.getTeamName() + ", " + t.getTotalMatches() + ", " + t.getWins() + ", " + t.getLosses() + ", " + t.getNoResult());
-			      }
 		    }
 	  }
 }

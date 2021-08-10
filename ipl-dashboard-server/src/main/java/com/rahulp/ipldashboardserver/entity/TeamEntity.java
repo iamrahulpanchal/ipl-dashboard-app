@@ -8,6 +8,11 @@ import javax.persistence.Table;
 @Table(name="team")
 public class TeamEntity {
 	
+	@Override
+	public String toString() {
+		return "TeamEntity [teamName=" + teamName + ", totalMatches=" + totalMatches + ", wins=" + wins + ", losses="
+				+ losses + ", noResult=" + noResult + "]";
+	}
 	@Id
 	private String teamName;
 	private Long totalMatches;
