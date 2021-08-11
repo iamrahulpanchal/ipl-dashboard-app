@@ -10,6 +10,7 @@ import org.springframework.batch.core.configuration.annotation.JobBuilderFactory
 import org.springframework.batch.core.configuration.annotation.StepBuilderFactory;
 import org.springframework.batch.core.launch.support.RunIdIncrementer;
 import org.springframework.batch.item.database.JpaItemWriter;
+import org.springframework.batch.item.database.builder.JpaItemWriterBuilder;
 import org.springframework.batch.item.file.FlatFileItemReader;
 import org.springframework.batch.item.file.builder.FlatFileItemReaderBuilder;
 import org.springframework.batch.item.file.mapping.BeanWrapperFieldSetMapper;
@@ -32,7 +33,7 @@ public class BatchConfiguration {
 	  public StepBuilderFactory stepBuilderFactory;
 	  
 	  @PersistenceUnit
-	  public EntityManagerFactory emf;
+	  public EntityManagerFactory entityManagerFactory;
 	  
 	  private final String[] fields = new String[] {
 			  "id", "city", "date", "player_of_match", "venue", "team1", "team2",
@@ -55,14 +56,15 @@ public class BatchConfiguration {
 	  
 	  @Bean
 	  public MatchDataProcessor processor() {
-	    return new MatchDataProcessor();
+		  return new MatchDataProcessor();
 	  }
 	  
 	  @Bean
 	  public JpaItemWriter<MatchEntity> writer(){
-		  	JpaItemWriter<MatchEntity> writer = new JpaItemWriter<>();
-	        writer.setEntityManagerFactory(emf);
-	        return writer;
+		  return new JpaItemWriterBuilder<MatchEntity>()
+			.entityManagerFactory(entityManagerFactory)
+			.usePersist(true)
+			.build();
 	  }
 	  
 	  @Bean
