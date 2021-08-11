@@ -1,6 +1,7 @@
 package com.rahulp.ipldashboardserver.batchprocessing;
 
-import javax.sql.DataSource;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.PersistenceUnit;
 
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;
@@ -8,9 +9,7 @@ import org.springframework.batch.core.configuration.annotation.EnableBatchProces
 import org.springframework.batch.core.configuration.annotation.JobBuilderFactory;
 import org.springframework.batch.core.configuration.annotation.StepBuilderFactory;
 import org.springframework.batch.core.launch.support.RunIdIncrementer;
-import org.springframework.batch.item.database.BeanPropertyItemSqlParameterSourceProvider;
-import org.springframework.batch.item.database.JdbcBatchItemWriter;
-import org.springframework.batch.item.database.builder.JdbcBatchItemWriterBuilder;
+import org.springframework.batch.item.database.JpaItemWriter;
 import org.springframework.batch.item.file.FlatFileItemReader;
 import org.springframework.batch.item.file.builder.FlatFileItemReaderBuilder;
 import org.springframework.batch.item.file.mapping.BeanWrapperFieldSetMapper;
@@ -25,11 +24,15 @@ import com.rahulp.ipldashboardserver.entity.MatchEntity;
 @Configuration
 @EnableBatchProcessing
 public class BatchConfiguration {
+	
 	  @Autowired
 	  public JobBuilderFactory jobBuilderFactory;
 
 	  @Autowired
 	  public StepBuilderFactory stepBuilderFactory;
+	  
+	  @PersistenceUnit
+	  public EntityManagerFactory emf;
 	  
 	  private final String[] fields = new String[] {
 			  "id", "city", "date", "player_of_match", "venue", "team1", "team2",
@@ -56,13 +59,10 @@ public class BatchConfiguration {
 	  }
 	  
 	  @Bean
-	  public JdbcBatchItemWriter<MatchEntity> writer(DataSource dataSource) {
-	    return new JdbcBatchItemWriterBuilder<MatchEntity>()
-	      .itemSqlParameterSourceProvider(new BeanPropertyItemSqlParameterSourceProvider<>())
-	      .sql("INSERT INTO match (match_id, city, date, player_of_match, venue, team1, team2, toss_winner, toss_decision, match_winner, result, result_margin, method, umpire1, umpire2) "
-	      		+ "VALUES (:matchId, :city, :date, :playerOfMatch, :venue, :team1, :team2, :tossWinner, :tossDecision, :matchWinner, :result, :resultMargin, :method, :umpire1, :umpire2)")
-	      .dataSource(dataSource)
-	      .build();
+	  public JpaItemWriter<MatchEntity> writer(){
+		  	JpaItemWriter<MatchEntity> writer = new JpaItemWriter<>();
+	        writer.setEntityManagerFactory(emf);
+	        return writer;
 	  }
 	  
 	  @Bean
@@ -76,7 +76,7 @@ public class BatchConfiguration {
 	  }
 
 	  @Bean
-	  public Step step1(JdbcBatchItemWriter<MatchEntity> writer) {
+	  public Step step1(JpaItemWriter<MatchEntity> writer) {
 	    return stepBuilderFactory.get("step1")
 	      .<MatchDTO, MatchEntity> chunk(10)
 	      .reader(reader())
