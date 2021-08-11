@@ -8,7 +8,7 @@ import org.springframework.data.repository.CrudRepository;
 import com.rahulp.ipldashboardserver.entity.TeamEntity;
 
 public interface TeamRepository extends CrudRepository<TeamEntity, String> {
-	
-	@Query("select t from TeamEntity t")
-	public List<TeamEntity> getAllTeams();
+
+    @Query("select t from TeamEntity t")
+    public List<TeamEntity> getAllTeams();
 }

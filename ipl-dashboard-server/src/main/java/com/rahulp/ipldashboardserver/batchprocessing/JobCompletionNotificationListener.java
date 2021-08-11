@@ -12,17 +12,17 @@ import com.rahulp.ipldashboardserver.service.TeamService;
 
 @Component
 public class JobCompletionNotificationListener extends JobExecutionListenerSupport {
-	
-	  private static final Logger log = LoggerFactory.getLogger(JobCompletionNotificationListener.class);
-	
-	  @Autowired
-	  private TeamService teamService;
-	
-	  @Override
-	  public void afterJob(JobExecution jobExecution) {
-		    if(jobExecution.getStatus() == BatchStatus.COMPLETED) {
-			      log.info("!!! JOB FINISHED! Time to verify the results");
-			      teamService.addNewTeam();
-		    }
-	  }
+
+    private static final Logger log = LoggerFactory.getLogger(JobCompletionNotificationListener.class);
+
+    @Autowired
+    private TeamService teamService;
+
+    @Override
+    public void afterJob(JobExecution jobExecution) {
+        if (jobExecution.getStatus() == BatchStatus.COMPLETED) {
+            log.info("!!! JOB FINISHED! Time to verify the results");
+            teamService.addNewTeam();
+        }
+    }
 }

@@ -25,65 +25,77 @@ import com.rahulp.ipldashboardserver.entity.MatchEntity;
 @Configuration
 @EnableBatchProcessing
 public class BatchConfiguration {
-	
-	  @Autowired
-	  public JobBuilderFactory jobBuilderFactory;
 
-	  @Autowired
-	  public StepBuilderFactory stepBuilderFactory;
-	  
-	  @PersistenceUnit
-	  public EntityManagerFactory entityManagerFactory;
-	  
-	  private final String[] fields = new String[] {
-			  "id", "city", "date", "player_of_match", "venue", "team1", "team2",
-			  "toss_winner", "toss_decision", "winner", "result", "result_margin",
-			  "method", "umpire1", "umpire2"
-	  };
-	  
-	  @Bean
-	  public FlatFileItemReader<MatchDTO> reader() {
-	    return new FlatFileItemReaderBuilder<MatchDTO>()
-	      .name("matchDtoReader")
-	      .resource(new ClassPathResource("ipl-dataset.csv"))
-	      .delimited()
-	      .names(fields)
-	      .fieldSetMapper(new BeanWrapperFieldSetMapper<MatchDTO>() {{
-	        setTargetType(MatchDTO.class);
-	      }})
-	      .build();
-	  }
-	  
-	  @Bean
-	  public MatchDataProcessor processor() {
-		  return new MatchDataProcessor();
-	  }
-	  
-	  @Bean
-	  public JpaItemWriter<MatchEntity> writer(){
-		  return new JpaItemWriterBuilder<MatchEntity>()
-			.entityManagerFactory(entityManagerFactory)
-			.usePersist(true)
-			.build();
-	  }
-	  
-	  @Bean
-	  public Job importUserJob(JobCompletionNotificationListener listener, Step step1) {
-	    return jobBuilderFactory.get("importUserJob")
-	      .incrementer(new RunIdIncrementer())
-	      .listener(listener)
-	      .flow(step1)
-	      .end()
-	      .build();
-	  }
+    @Autowired
+    public JobBuilderFactory jobBuilderFactory;
 
-	  @Bean
-	  public Step step1(JpaItemWriter<MatchEntity> writer) {
-	    return stepBuilderFactory.get("step1")
-	      .<MatchDTO, MatchEntity> chunk(10)
-	      .reader(reader())
-	      .processor(processor())
-	      .writer(writer)
-	      .build();
-	  }
+    @Autowired
+    public StepBuilderFactory stepBuilderFactory;
+
+    @PersistenceUnit
+    public EntityManagerFactory entityManagerFactory;
+
+    private final String[] fields = new String[] {
+        "id",
+        "city",
+        "date",
+        "player_of_match",
+        "venue",
+        "team1",
+        "team2",
+        "toss_winner",
+        "toss_decision",
+        "winner",
+        "result",
+        "result_margin",
+        "method",
+        "umpire1",
+        "umpire2"
+    };
+
+    @Bean
+    public FlatFileItemReader<MatchDTO> reader() {
+        return new FlatFileItemReaderBuilder<MatchDTO>()
+            .name("matchDtoReader")
+            .resource(new ClassPathResource("ipl-dataset.csv"))
+            .delimited()
+            .names(fields)
+            .fieldSetMapper(new BeanWrapperFieldSetMapper<MatchDTO>(){{
+                    setTargetType(MatchDTO.class);
+            }})
+            .build();
+    }
+
+    @Bean
+    public MatchDataProcessor processor() {
+        return new MatchDataProcessor();
+    }
+
+    @Bean
+    public JpaItemWriter<MatchEntity> writer() {
+        return new JpaItemWriterBuilder<MatchEntity>()
+            .entityManagerFactory(entityManagerFactory)
+            .usePersist(true)
+            .build();
+    }
+
+    @Bean
+    public Job importUserJob(JobCompletionNotificationListener listener, Step step1) {
+        return jobBuilderFactory.get("importUserJob")
+            .incrementer(new RunIdIncrementer())
+            .listener(listener)
+            .flow(step1)
+            .end()
+            .build();
+    }
+
+    @Bean
+    public Step step1(JpaItemWriter<MatchEntity> writer) {
+        return stepBuilderFactory.get("step1")
+            .<MatchDTO, MatchEntity> chunk(10)
+            .reader(reader())
+            .processor(processor())
+            .writer(writer)
+            .build();
+    }
 }
