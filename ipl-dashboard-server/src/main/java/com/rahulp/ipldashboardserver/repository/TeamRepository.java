@@ -9,6 +9,6 @@ import com.rahulp.ipldashboardserver.entity.TeamEntity;
 
 public interface TeamRepository extends CrudRepository<TeamEntity, String> {
 
-    @Query("select t from TeamEntity t")
-    public List<TeamEntity> getAllTeams();
+    @Query("select t.teamName from TeamEntity t")
+    public List<String> getAllTeams();
 }

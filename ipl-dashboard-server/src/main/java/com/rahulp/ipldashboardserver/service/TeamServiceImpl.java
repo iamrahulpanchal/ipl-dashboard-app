@@ -6,8 +6,6 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -21,8 +19,6 @@ import com.rahulp.ipldashboardserver.repository.TeamRepository;
 @Service(value = "teamService")
 @Transactional
 public class TeamServiceImpl implements TeamService {
-
-    private static final Logger log = LoggerFactory.getLogger(TeamServiceImpl.class);
 
     @Autowired
     private MatchRepository matchRepository;
@@ -53,11 +49,6 @@ public class TeamServiceImpl implements TeamService {
         }
 
         teamRepository.saveAll(saveTeams);
-
-        List<TeamEntity> allTeams = teamRepository.getAllTeams();
-        for (TeamEntity t: allTeams) {
-            log.info(t + "");
-        }
     }
 
     @Override
@@ -79,6 +70,12 @@ public class TeamServiceImpl implements TeamService {
 		Pageable first4 = PageRequest.of(0, 4);
 		team.setFirst4Matches(matchRepository.getFirst4Matches(teamName, first4));
 		return team;
+	}
+
+	@Override
+	public List<String> getAllTeams() {
+		List<String> teamsList = teamRepository.getAllTeams();
+		return teamsList;
 	}
     
     
