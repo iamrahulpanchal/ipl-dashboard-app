@@ -1,10 +1,12 @@
 package com.rahulp.ipldashboardserver.entity;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 @Entity
 @Table(name = "match")
@@ -26,8 +28,26 @@ public class MatchEntity {
     private String method;
     private String umpire1;
     private String umpire2;
+    
+    @Transient
+    private List<Integer> yearsList;
+    
+    @Transient
+    private List<MatchEntity> matchesList;
 
-    public Long getMatchId() {
+    public List<Integer> getYearsList() {
+		return yearsList;
+	}
+	public void setYearsList(List<Integer> yearsList) {
+		this.yearsList = yearsList;
+	}
+	public List<MatchEntity> getMatchesList() {
+		return matchesList;
+	}
+	public void setMatchesList(List<MatchEntity> matchesList) {
+		this.matchesList = matchesList;
+	}
+	public Long getMatchId() {
         return matchId;
     }
     public void setMatchId(Long matchId) {

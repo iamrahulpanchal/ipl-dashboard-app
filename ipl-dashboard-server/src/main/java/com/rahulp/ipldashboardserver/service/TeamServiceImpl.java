@@ -1,5 +1,6 @@
 package com.rahulp.ipldashboardserver.service;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -12,6 +13,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.rahulp.ipldashboardserver.entity.MatchEntity;
 import com.rahulp.ipldashboardserver.entity.TeamEntity;
 import com.rahulp.ipldashboardserver.repository.MatchRepository;
 import com.rahulp.ipldashboardserver.repository.TeamRepository;
@@ -19,7 +21,7 @@ import com.rahulp.ipldashboardserver.repository.TeamRepository;
 @Service(value = "teamService")
 @Transactional
 public class TeamServiceImpl implements TeamService {
-
+	
     @Autowired
     private MatchRepository matchRepository;
 
@@ -76,6 +78,20 @@ public class TeamServiceImpl implements TeamService {
 	public List<String> getAllTeams() {
 		List<String> teamsList = teamRepository.getAllTeams();
 		return teamsList;
+	}
+
+	@Override
+	public MatchEntity getMatchesByTeamAndYear(String teamName, Integer year) {
+		String strDate1 = year + "-01-01";
+		String strDate2 = (year + 1) + "-01-01";
+		LocalDate date1 = LocalDate.parse(strDate1);
+		LocalDate date2 = LocalDate.parse(strDate2);
+		
+		List<MatchEntity> matchesList = matchRepository.getMatchesByTeamAndYear(teamName, date1, date2);
+		
+		MatchEntity matchEntity = new MatchEntity();
+		matchEntity.setMatchesList(matchesList);
+		return matchEntity;
 	}
     
     

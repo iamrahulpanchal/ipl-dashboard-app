@@ -1,5 +1,6 @@
 package com.rahulp.ipldashboardserver.repository;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.data.domain.Pageable;
@@ -29,4 +30,7 @@ public interface MatchRepository extends CrudRepository<MatchEntity, Integer> {
     
     @Query("select m from MatchEntity m where m.team1 = ?1 or m.team2 = ?1 ORDER BY m.date DESC")
     public List<MatchEntity> getFirst4Matches(String teamName, Pageable pageable);
+    
+    @Query("select m from MatchEntity m where (m.team1 = ?1 or m.team2 = ?1) AND (m.date > ?2 AND m.date < ?3)")
+    public List<MatchEntity> getMatchesByTeamAndYear(String teamName, LocalDate date1, LocalDate date2);
 }

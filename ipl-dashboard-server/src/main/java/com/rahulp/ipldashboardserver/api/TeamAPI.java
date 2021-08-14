@@ -9,8 +9,10 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.rahulp.ipldashboardserver.entity.MatchEntity;
 import com.rahulp.ipldashboardserver.entity.TeamEntity;
 import com.rahulp.ipldashboardserver.service.TeamService;
 
@@ -28,9 +30,15 @@ public class TeamAPI {
 		return new ResponseEntity<>(teamsList, HttpStatus.OK);
 	}
 	
-	@GetMapping(value = "/team/{teamName}")
+	@GetMapping(value = "/teams/{teamName}")
 	public ResponseEntity<TeamEntity> getTeamData(@PathVariable String teamName){
 		TeamEntity team = teamService.getTeamData(teamName);
 		return new ResponseEntity<>(team, HttpStatus.OK);
+	}
+	
+	@GetMapping(value = "/teams/{teamName}/matches")
+	public ResponseEntity<MatchEntity> getMatchesByYear(@PathVariable String teamName, @RequestParam Integer year){
+		MatchEntity matchEntity = teamService.getMatchesByTeamAndYear(teamName, year);
+		return new ResponseEntity<>(matchEntity, HttpStatus.OK);
 	}
 }
