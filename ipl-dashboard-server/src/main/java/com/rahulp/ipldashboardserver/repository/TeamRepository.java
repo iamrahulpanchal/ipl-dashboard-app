@@ -11,4 +11,5 @@ public interface TeamRepository extends CrudRepository<TeamEntity, String> {
 
     @Query("select t.teamName from TeamEntity t")
     public List<String> getAllTeams();
+    
 }

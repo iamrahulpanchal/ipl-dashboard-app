@@ -79,6 +79,24 @@ public class TeamServiceImpl implements TeamService {
 		List<String> teamsList = teamRepository.getAllTeams();
 		return teamsList;
 	}
+	
+	@Override
+	public List<Integer> getYearsListByTeam(String teamName) {
+		List<LocalDate> dates = matchRepository.getMatchesDate(teamName);
+		List<Integer> yearsList = new ArrayList<>();
+		for(LocalDate date: dates) {
+			String val = String.valueOf(date);
+			String finalVal = val.substring(0, 4);
+			yearsList.add(Integer.parseInt(finalVal));
+		}
+		
+		Set<Integer> yearsSet = new LinkedHashSet<>();
+		yearsSet.addAll(yearsList);
+		
+		yearsList.clear();
+		yearsList.addAll(yearsSet);
+		return yearsList;
+	}
 
 	@Override
 	public MatchEntity getMatchesByTeamAndYear(String teamName, Integer year) {
@@ -91,9 +109,8 @@ public class TeamServiceImpl implements TeamService {
 		
 		MatchEntity matchEntity = new MatchEntity();
 		matchEntity.setMatchesList(matchesList);
+		matchEntity.setYearsList(getYearsListByTeam(teamName));
 		return matchEntity;
 	}
-    
-    
 
 }
