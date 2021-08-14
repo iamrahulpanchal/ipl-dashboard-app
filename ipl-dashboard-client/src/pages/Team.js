@@ -13,17 +13,17 @@ export const Team = () => {
 
     useEffect(() => {
         const fetchMatches = async () => {
-            const response = await fetch(`http://localhost:8080/team/${teamName}`);
+            const response = await fetch(`http://localhost:8080/teams/${teamName}`);
             const data = await response.json();
+            if(data.error != null){
+                // return <Home />;
+                return null;
+            }
             setTeam(data);
             console.log(data);
         };
         fetchMatches();
     }, [teamName]);
-
-    if(!team.teamName) {
-        return <h1>Team Not Found!</h1>
-    }
 
     return (
         <div className="Team">
