@@ -34,12 +34,14 @@ export const Match = () => {
         return <NotFound />
     }
 
+    const matchesByYearLink = `/teams/${teamName}/matches/`;
+
     return (
         <div className="Match">
             <Link to="/"><h1>HOME PAGE</h1></Link>
             {statusCode === 200 ? <h1>Match Page</h1> : <p></p>}
             {years.map(year => {
-                return <h5>{year}</h5>
+                return <Link to={matchesByYearLink + year}><h5>{year}</h5></Link>
             })}
             {matches.map(match => {
                 return <MatchDetail key={match.matchId} match={match} teamName={teamName} />
