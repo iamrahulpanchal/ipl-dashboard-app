@@ -1,5 +1,5 @@
 import { React, useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { MatchDetail } from '../components/MatchDetail';
 import { NotFound } from './NotFound';
 
@@ -36,6 +36,7 @@ export const Match = () => {
 
     return (
         <div className="Match">
+            <Link to="/"><h1>HOME PAGE</h1></Link>
             {statusCode === 200 ? <h1>Match Page</h1> : <p></p>}
             {years.map(year => {
                 return <h5>{year}</h5>

@@ -19,6 +19,7 @@ export const Home = () => {
 
     return(
         <div className="Home">
+            <Link to="/"><h1>HOME PAGE</h1></Link>
             <h1>Teams List</h1>
             {allTeams.map(team => {
                 return <Link to={teamPage + team}><h5>{team}</h5></Link>
