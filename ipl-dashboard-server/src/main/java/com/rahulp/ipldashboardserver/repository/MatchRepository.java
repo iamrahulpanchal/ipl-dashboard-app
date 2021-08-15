@@ -31,7 +31,7 @@ public interface MatchRepository extends CrudRepository<MatchEntity, Integer> {
     @Query("select m from MatchEntity m where m.team1 = ?1 or m.team2 = ?1 ORDER BY m.date DESC")
     public List<MatchEntity> getFirst4Matches(String teamName, Pageable pageable);
     
-    @Query("select m from MatchEntity m where (m.team1 = ?1 or m.team2 = ?1) AND (m.date >= ?2 AND m.date < ?3) ORDER BY m.date DESC")
+    @Query("select m from MatchEntity m where (m.team1 = ?1 or m.team2 = ?1) AND (m.date >= ?2 AND m.date < ?3) AND m.matchWinner <> 'NA' ORDER BY m.date DESC")
     public List<MatchEntity> getMatchesByTeamAndYear(String teamName, LocalDate date1, LocalDate date2);
     
     @Query("select m.date from MatchEntity m where m.team1 = ?1 or m.team2 = ?1 ORDER BY m.date DESC")

@@ -99,7 +99,7 @@ public class TeamServiceImpl implements TeamService {
 	}
 
 	@Override
-	public MatchEntity getMatchesByTeamAndYear(String teamName, Integer year) {
+	public List<MatchEntity> getMatchesByTeamAndYear(String teamName, Integer year) {
 		String strDate1 = year + "-01-01";
 		String strDate2 = (year + 1) + "-01-01";
 		LocalDate date1 = LocalDate.parse(strDate1);
@@ -107,10 +107,27 @@ public class TeamServiceImpl implements TeamService {
 		
 		List<MatchEntity> matchesList = matchRepository.getMatchesByTeamAndYear(teamName, date1, date2);
 		
-		MatchEntity matchEntity = new MatchEntity();
-		matchEntity.setMatchesList(matchesList);
-		matchEntity.setYearsList(getYearsListByTeam(teamName));
-		return matchEntity;
+		return matchesList;
+	}
+
+	@Override
+	public List<Integer> getYearsByTeam(String teamName) {
+		List<LocalDate> yearsList = matchRepository.getMatchesDate(teamName);
+		List<Integer> yearsListInt = new ArrayList<>();
+		
+		for(LocalDate date: yearsList) {
+			String val = String.valueOf(date);
+			val = val.substring(0, 4);
+			yearsListInt.add(Integer.parseInt(val));
+		}
+
+		Set<Integer> yearsSetString = new LinkedHashSet<>();
+		yearsSetString.addAll(yearsListInt);
+
+		yearsListInt.clear();
+		yearsListInt.addAll(yearsSetString);
+		
+		return yearsListInt;
 	}
 
 }

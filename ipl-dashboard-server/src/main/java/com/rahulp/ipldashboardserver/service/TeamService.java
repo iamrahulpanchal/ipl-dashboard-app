@@ -12,5 +12,6 @@ public interface TeamService {
     public TeamEntity getTeamData(String teamName);
     public List<String> getAllTeams();
     public List<Integer> getYearsListByTeam(String teamName);
-    public MatchEntity getMatchesByTeamAndYear(String teamName, Integer year);
+    public List<MatchEntity> getMatchesByTeamAndYear(String teamName, Integer year);
+    public List<Integer> getYearsByTeam(String teamName);
 }

@@ -37,8 +37,14 @@ public class TeamAPI {
 	}
 	
 	@GetMapping(value = "/teams/{teamName}/matches")
-	public ResponseEntity<MatchEntity> getMatchesByYear(@PathVariable String teamName, @RequestParam Integer year){
-		MatchEntity matchEntity = teamService.getMatchesByTeamAndYear(teamName, year);
+	public ResponseEntity<List<MatchEntity>> getMatchesByYear(@PathVariable String teamName, @RequestParam Integer year){
+		List<MatchEntity> matchEntity = teamService.getMatchesByTeamAndYear(teamName, year);
 		return new ResponseEntity<>(matchEntity, HttpStatus.OK);
+	}
+	
+	@GetMapping(value = "/teams/{teamName}/years")
+	public ResponseEntity<List<Integer>> getYearsByTeam(@PathVariable String teamName){
+		List<Integer> yearsList = teamService.getYearsByTeam(teamName);
+		return new ResponseEntity<>(yearsList, HttpStatus.OK);
 	}
 }
