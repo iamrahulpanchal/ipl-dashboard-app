@@ -2,6 +2,7 @@ import './App.css';
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 import { Team } from './pages/Team';
 import { Match } from './pages/Match';
+import { Home } from './pages/Home';
 
 function App() {
     return (
@@ -9,7 +10,7 @@ function App() {
           <Router>
             <Switch>
               <Route path="/" exact>
-                <h1>Home Page</h1>
+                <Home />
               </Route>
               <Route path="/teams/:teamName" exact>
                 <Team />
