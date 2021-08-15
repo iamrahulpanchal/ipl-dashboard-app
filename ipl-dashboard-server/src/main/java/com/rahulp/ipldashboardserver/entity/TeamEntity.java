@@ -12,19 +12,29 @@ import javax.persistence.Transient;
 public class TeamEntity {
 
     @Override
-    public String toString() {
-        return "TeamEntity [teamName=" + teamName + ", totalMatches=" + totalMatches + ", wins=" + wins + ", losses=" +
-            losses + ", noResult=" + noResult + "]";
-    }
-    
-    @Id
+	public String toString() {
+		return "TeamEntity [teamName=" + teamName + ", totalMatches=" + totalMatches + ", wins=" + wins + ", losses="
+				+ losses + ", noResult=" + noResult + ", ties=" + ties + ", first4Matches=" + first4Matches
+				+ ", getTies()=" + getTies() + ", getFirst4Matches()=" + getFirst4Matches() + ", getTeamName()="
+				+ getTeamName() + ", getTotalMatches()=" + getTotalMatches() + ", getWins()=" + getWins()
+				+ ", getLosses()=" + getLosses() + ", getNoResult()=" + getNoResult() + ", getClass()=" + getClass()
+				+ ", hashCode()=" + hashCode() + ", toString()=" + super.toString() + "]";
+	}
+	@Id
     private String teamName;
     private Long totalMatches;
     private Long wins;
     private Long losses;
     private Long noResult;
+    private Long ties;
     
-    @Transient
+    public Long getTies() {
+		return ties;
+	}
+	public void setTies(Long ties) {
+		this.ties = ties;
+	}
+	@Transient
     private List<MatchEntity> first4Matches;
 
     public List<MatchEntity> getFirst4Matches() {

@@ -38,7 +38,8 @@ public class TeamServiceImpl implements TeamService {
             Long totalMatches = matchRepository.getTotalMatches(teamVal);
             Long totalWins = matchRepository.getTotalWins(teamVal);
             Long noResult = matchRepository.getNoResult(teamVal);
-            Long losses = totalMatches - totalWins - noResult;
+            Long totalTies = matchRepository.getTotalTies(teamVal);
+            Long losses = totalMatches - totalWins - noResult - totalTies;
 
             TeamEntity team = new TeamEntity();
             team.setTeamName(teamVal);
@@ -46,6 +47,7 @@ public class TeamServiceImpl implements TeamService {
             team.setWins(totalWins);
             team.setLosses(losses);
             team.setNoResult(noResult);
+            team.setTies(totalTies);
 
             saveTeams.add(team);
         }

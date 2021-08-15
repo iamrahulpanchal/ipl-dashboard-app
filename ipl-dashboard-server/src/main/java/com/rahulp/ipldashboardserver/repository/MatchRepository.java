@@ -28,6 +28,9 @@ public interface MatchRepository extends CrudRepository<MatchEntity, Integer> {
     @Query("select count(m) from MatchEntity m where m.result = 'NA' AND (m.team1 = ?1 OR m.team2 = ?1)")
     public Long getNoResult(String teamName);
     
+    @Query("select count(m) from MatchEntity m where m.result = 'tie' AND (m.team1 = ?1 OR m.team2 = ?1)")
+    public Long getTotalTies(String teamName);
+    
     @Query("select m from MatchEntity m where m.team1 = ?1 or m.team2 = ?1 ORDER BY m.date DESC")
     public List<MatchEntity> getFirst4Matches(String teamName, Pageable pageable);
     
