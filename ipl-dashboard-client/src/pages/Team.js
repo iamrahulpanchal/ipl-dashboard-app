@@ -14,6 +14,10 @@ export const Team = () => {
 
     const [statusCode, setStatusCode] = useState({});
 
+    const [loading, setLoading] = useState({
+        loading: true
+    });
+
     const { teamName } = useParams();
 
     useEffect(() => {
@@ -24,6 +28,7 @@ export const Team = () => {
             setStatusCode(response.status);
             const data = await response.json();
             setTeam(data);
+            setLoading(false);
             setYears(yearsData);
             console.log(data);
         };
@@ -39,6 +44,7 @@ export const Team = () => {
     const moreMatches = `/teams/${teamName}/matches/${maxYear}`;
     
     return (
+        loading ? <p></p> :
         <div className="Team">
             <Link to="/"><h1>HOME PAGE</h1></Link>
             <h1>{team.teamName}</h1>
