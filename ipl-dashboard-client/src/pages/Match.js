@@ -4,10 +4,7 @@ import { MatchDetail } from '../components/MatchDetail';
 
 export const Match = () => {
 
-    const [matches, setMatches] = useState({
-        matchesList: [],
-        yearsList: []
-    });
+    const [ matches, setMatches ] = useState([]);
     
     const { teamName, year } = useParams();
 
@@ -24,8 +21,7 @@ export const Match = () => {
     return (
         <div className="Match">
             <h1>Match Page</h1>
-            {matches.yearsList.map(year => <div><b>{year}</b><br /></div>)}
-            {matches.matchesList.map(match => {
+            {matches.map(match => {
                 return <MatchDetail key={match.matchId} match={match} teamName={teamName} />
             })}
         </div>

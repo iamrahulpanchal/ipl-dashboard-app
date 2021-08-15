@@ -11,7 +11,9 @@ export const MatchSmall = ({match, teamName}) => {
     return (
         <div className="MatchSmall">
             <h4>vs <Link to={vsTeamLink}>{vsTeam}</Link></h4>
-            <h6>{match.matchWinner} won by {match.resultMargin} {match.result} </h6>
+            { match.result === 'tie' ? 
+            <h6>Match Tied</h6> : <h6>{match.matchWinner} won by {match.resultMargin} {match.result} </h6>
+            }
         </div>
     );
 }

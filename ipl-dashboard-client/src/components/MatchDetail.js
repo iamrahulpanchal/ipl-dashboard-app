@@ -15,7 +15,9 @@ export const MatchDetail = ({match, teamName}) => {
             <h4>vs <Link to={vsTeamLink}>{vsTeam}</Link></h4>
             <p>{match.date}</p>
             <p>at {match.venue}, {match.city}</p>
-            <h4>{match.matchWinner} won by {match.resultMargin} {match.result} </h4>
+            { match.result === 'tie' ? 
+            <h4>Match Tied</h4> : <h4>{match.matchWinner} won by {match.resultMargin} {match.result} </h4>
+            }
             <hr />
         </div>
     );

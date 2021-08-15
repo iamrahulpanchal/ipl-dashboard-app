@@ -3,9 +3,7 @@ import { Link } from 'react-router-dom';
 
 export const Home = () => {
     
-    const [ allTeams, setAllTeams ] = useState({
-        allTeams: []
-    });
+    const [ allTeams, setAllTeams ] = useState([]);
 
     useEffect(() => {
         const fetchTeams = async () => {
