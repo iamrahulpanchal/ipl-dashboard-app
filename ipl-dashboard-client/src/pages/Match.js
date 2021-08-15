@@ -1,12 +1,11 @@
 import { React, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { MatchDetail } from '../components/MatchDetail';
-import { NotFound } from './NotFound';
 
 export const Match = () => {
 
     const [matches, setMatches] = useState({
-        matchesList: [1],
+        matchesList: [],
         yearsList: []
     });
     
@@ -21,10 +20,6 @@ export const Match = () => {
         };
         fetchMatches();
     }, [teamName, year]);
-
-    if(matches.matchesList.length === 0){
-        return <NotFound />
-    }
 
     return (
         <div className="Match">

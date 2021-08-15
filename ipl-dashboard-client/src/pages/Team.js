@@ -2,6 +2,7 @@ import { React, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { MatchDetail } from '../components/MatchDetail';
 import { MatchSmall } from '../components/MatchSmall';
+import { NotFound } from './NotFound';
 
 export const Team = () => {
 
@@ -9,21 +10,23 @@ export const Team = () => {
         first4Matches: []
     });
 
+    const [statusCode, setStatusCode] = useState({});
+
     const { teamName } = useParams();
 
     useEffect(() => {
         const fetchMatches = async () => {
             const response = await fetch(`http://localhost:8080/teams/${teamName}`);
+            setStatusCode(response.status);
             const data = await response.json();
-            if(data.error != null){
-                // return <Home />;
-                return null;
-            }
             setTeam(data);
-            console.log(data);
         };
         fetchMatches();
     }, [teamName]);
+
+    if(statusCode === 500){
+        return <NotFound />
+    }
 
     return (
         <div className="Team">

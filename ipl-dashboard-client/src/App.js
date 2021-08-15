@@ -9,15 +9,9 @@ function App() {
         <div className="App container">
           <Router>
             <Switch>
-              <Route path="/" exact>
-                <Home />
-              </Route>
-              <Route path="/teams/:teamName" exact>
-                <Team />
-              </Route>
-              <Route path="/teams/:teamName/matches/:year" exact>
-                <Match />
-              </Route>
+              <Route path="/" component={Home} exact />
+              <Route path="/teams/:teamName" component={Team} exact />
+              <Route path="/teams/:teamName/matches/:year" component={Match} exact />
             </Switch>
           </Router>
         </div>
