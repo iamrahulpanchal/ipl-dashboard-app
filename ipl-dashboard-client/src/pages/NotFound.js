@@ -1,7 +1,12 @@
 import { React } from 'react';
+import { Link } from 'react-router-dom';
+import { Header } from '../components/Header';
 
 export const NotFound = () => {
     return (
-        <h1>Something went wrong</h1>
+        <div>
+            <Link to="/"><Header /></Link>
+            <h3>Something went wrong</h3>
+        </div>
     );
 }
