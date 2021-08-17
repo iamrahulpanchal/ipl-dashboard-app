@@ -4,7 +4,7 @@ import { Header } from '../components/Header';
 
 export const NotFound = () => {
     return (
-        <div>
+        <div className="">
             <Link to="/"><Header /></Link>
             <h3>Something went wrong</h3>
         </div>

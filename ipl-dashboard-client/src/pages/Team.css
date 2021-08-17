@@ -1,0 +1,7 @@
+.teamNameRow, .latestMatchesRow, .matchDetailRow, .matchSmallRow {
+    border: 1px solid black;
+}
+
+.Team p, h1, h4{
+    margin: 0 !important;
+}

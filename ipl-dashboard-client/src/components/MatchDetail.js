@@ -8,15 +8,14 @@ export const MatchDetail = ({match, teamName}) => {
 
     return (
         <div className="MatchDetail">
-            <h5>vs <Link to={vsTeamLink}>{vsTeam}</Link></h5>
+            <b>vs <Link to={vsTeamLink}>{vsTeam}</Link></b><br />
             <p>{match.date}</p>
             <p>at {match.venue}, {match.city}</p>
             { 
                 match.result === 'tie' ?
-                <h5>Match Tied</h5> :
-                <h5>{match.matchWinner} won by {match.resultMargin} {match.result} </h5>
+                <b>Match Tied</b> :
+                <b>{match.matchWinner} won by {match.resultMargin} {match.result} </b>
             }
-            <hr />
         </div>
     );
 }

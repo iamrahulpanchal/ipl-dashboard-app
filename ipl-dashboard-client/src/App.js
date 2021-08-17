@@ -7,7 +7,7 @@ import { NotFound } from './pages/NotFound';
 
 function App() {
     return (
-        <div className="App container">
+        <div className="App">
           <Router>
             <Switch>
               <Route path="/" component={Home} exact />

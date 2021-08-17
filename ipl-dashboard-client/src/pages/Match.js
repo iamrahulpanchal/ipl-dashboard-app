@@ -49,7 +49,6 @@ export const Match = () => {
             {years.map(year => {
                 return <div key={year}><Link to={matchesByYearLink + year}><h5>{year}</h5></Link></div>
             })}
-            <hr />
             {matches.map(match => {
                 return <MatchDetail key={match.matchId} match={match} teamName={teamName} />
             })}
