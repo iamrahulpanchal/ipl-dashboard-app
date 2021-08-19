@@ -1,9 +1,12 @@
 import { React } from 'react';
+import './Header.css';
 
 export const Header = () => {
     return (
-        <div>
-            <h3>Home Page (IPL Dashboard)</h3>
+        <div className="Header">
+            <div className="container">
+                <h5>HOME</h5>
+            </div>
         </div>
     );
 };

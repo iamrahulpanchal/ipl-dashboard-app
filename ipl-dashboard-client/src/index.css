@@ -8,10 +8,18 @@
 
 a{
   text-decoration: none !important;
+  color: #AD2831 !important;
 }
 
-body {
+html, body {
   font-family: 'Noto Sans KR', sans-serif !important;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  min-height: 100vh;
+  color: #212D40 !important;
+}
+
+.hr-tag{
+  border-top: 1px solid #212D40;
+  opacity: 0.5;
 }

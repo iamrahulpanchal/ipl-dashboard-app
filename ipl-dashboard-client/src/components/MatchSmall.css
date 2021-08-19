@@ -1,0 +1,21 @@
+.greenBorder{
+    border: 1px solid green;
+    min-height: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: green 0px 0px 4px;
+}
+
+.redBorder{
+    border: 1px solid red;
+    min-height: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: red 0px 0px 4px;
+}
+
+.match-small-result{
+    margin-top: 5px;
+    font-weight: bold;
+    margin-bottom: 5px;
+}

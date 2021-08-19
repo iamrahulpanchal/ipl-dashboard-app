@@ -1,7 +1,38 @@
-.teamNameRow, .latestMatchesRow, .matchDetailRow, .matchSmallRow {
+/* .teamNameRow, .latestMatchesRow, .matchDetailRow, .matchSmallRow {
     border: 1px solid black;
+} */
+
+/* .Team p, h1, h4{
+    margin: 0 !important;
+} */
+
+.matchSmallRow{
+    margin-top: 20px;
 }
 
-.Team p, h1, h4{
-    margin: 0 !important;
+.teamNameRow {
+    margin-top: 25px;
+}
+
+.team-stats {
+    margin-top: 10px;
+}
+
+.teamNameRow p, h1{
+    margin-bottom: 0;
+}
+
+.moreMatches{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.stats-text{
+    margin-top: 5px;
+    letter-spacing: 0.2px;
+}
+
+.total-matches-text{
+    letter-spacing: 0.2px;
 }

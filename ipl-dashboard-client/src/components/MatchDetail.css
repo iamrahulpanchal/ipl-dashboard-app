@@ -1,0 +1,25 @@
+.match-venue-city, .match-date, .motm-data{
+    margin-bottom: 7px;
+}
+
+p.match-umpires{
+    margin-bottom: 7px;
+    font-weight: bold;
+}
+
+.match-date, .motm-data{
+    margin-top: 7px;
+}
+
+.motm-umpires-flex{
+    display: flex;
+}
+
+.motm-umpires-align{
+    margin-left: auto;
+    text-align: right;
+}
+
+p.match-umpire12{
+    margin-bottom: 0;
+}
