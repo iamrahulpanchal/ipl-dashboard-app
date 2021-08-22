@@ -1,0 +1,15 @@
+.match-page-list .greenBorder, .match-page-list .redBorder, .match-page-list {
+    margin-top: 25px !important;
+}
+
+.years-row div {
+    margin-bottom: 10px;
+}
+
+.years-row {
+    margin-top: 32px;
+}
+
+.select-year{
+    margin-bottom: 20px;
+}

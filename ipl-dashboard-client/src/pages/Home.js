@@ -20,7 +20,7 @@ export const Home = () => {
 
     return(
         <div className="Home">
-            <Link to="/"><Header /></Link>
+            {/* <Link to="/"><Header /></Link> */}
             <h3>Teams</h3>
             {allTeams.map(team => {
                 return (

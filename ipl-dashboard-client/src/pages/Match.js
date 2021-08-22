@@ -3,6 +3,7 @@ import { Link, useParams } from 'react-router-dom';
 import { Header } from '../components/Header';
 import { MatchDetail } from '../components/MatchDetail';
 import { NotFound } from './NotFound';
+import './Match.css';
 
 export const Match = () => {
 
@@ -43,15 +44,31 @@ export const Match = () => {
 
     return (
         loading ? <p></p> : 
+
         <div className="Match">
-            <Link to="/"><Header /></Link>
-            <h3>Match Page</h3>
-            {years.map(year => {
-                return <div key={year}><Link to={matchesByYearLink + year}><h5>{year}</h5></Link></div>
-            })}
-            {matches.map(match => {
-                return <MatchDetail key={match.matchId} match={match} teamName={teamName} />
-            })}
+
+            {/* <Link to="/"><Header /></Link> */}
+
+            <div className="container">
+
+                <div className="row">
+                    <div className="col-lg-2 col-xl-2 col-md-2 col-sm-12 col-12 years-row">
+                        <h5 className="select-year">Select Year</h5>
+                        {years.map(year => {
+                            return <div key={year}><Link to={matchesByYearLink + year}><h6>{year}</h6></Link></div>
+                        })}
+                    </div>
+                    
+                    <div className="col-lg-10 col-xl-10 col-md-10 col-sm-12 col-12 match-page-list">
+                        <h1>{teamName}</h1>
+                        {matches.map(match => {
+                            return <MatchDetail key={match.matchId} match={match} teamName={teamName} />
+                        })}
+                    </div>
+                </div>
+                
+            </div>
+
         </div>
     );
 }

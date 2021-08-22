@@ -37,7 +37,7 @@ export const Team = () => {
         loading ? <p></p> :
         <div className="Team">
             
-            <Link to="/"><Header /></Link>
+            {/* <Link to="/"><Header /></Link> */}
 
             <div className="container">
 
@@ -68,7 +68,7 @@ export const Team = () => {
                 <div className="row matchSmallRow">
                     {team.first4Matches.slice(1).map(match => {
                         return (
-                            <div key={match.matchId} className="col-xl-3 col-lg-3 col-md-6 col-sm-6 col-12">
+                            <div key={match.matchId} className="col-xl-3 col-lg-3 col-md-6 col-sm-6 col-12 match-small-1">
                                 <MatchSmall match={match} teamName={teamName}/>
                             </div>
                         );
