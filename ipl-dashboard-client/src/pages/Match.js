@@ -15,14 +15,14 @@ export const Match = () => {
 
     useEffect(() => {
         const fetchMatches = async () => {
-            const matchesResponse = await fetch(`http://localhost:8080/teams/${teamName}/matches?year=${year}`);
+            const matchesResponse = await fetch(`${process.env.REACT_APP_API_ROOT_URL}/teams/${teamName}/matches?year=${year}`);
             const matchesData = await matchesResponse.json();
             
             if(matchesData.length === 0){
                 setStatusCode(500);
             } else {
                 setStatusCode(200);
-                const yearsResponse = await fetch(`http://localhost:8080/teams/${teamName}/years`);
+                const yearsResponse = await fetch(`${process.env.REACT_APP_API_ROOT_URL}/teams/${teamName}/years`);
                 const yearsData = await yearsResponse.json();
                 setYears(yearsData);
             }

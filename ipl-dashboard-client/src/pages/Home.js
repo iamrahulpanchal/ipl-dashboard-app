@@ -8,7 +8,8 @@ export const Home = () => {
 
     useEffect(() => {
         const fetchTeams = async () => {
-            const response = await fetch('http://localhost:8080');
+            // const response = await fetch('http://localhost:8080');
+            const response = await fetch(`${process.env.REACT_APP_API_ROOT_URL}`);
             const data = await response.json();
             setAllTeams(data);
         };
