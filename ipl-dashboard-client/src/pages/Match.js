@@ -25,12 +25,10 @@ export const Match = () => {
                 const yearsResponse = await fetch(`http://localhost:8080/teams/${teamName}/years`);
                 const yearsData = await yearsResponse.json();
                 setYears(yearsData);
-                console.log(yearsData);
             }
 
             setMatches(matchesData);
             setLoading(false);
-            console.log(matchesData);
         };
         fetchMatches();
     }, [teamName, year]);

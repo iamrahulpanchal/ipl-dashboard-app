@@ -11,7 +11,6 @@ export const Home = () => {
             const response = await fetch('http://localhost:8080');
             const data = await response.json();
             setAllTeams(data);
-            console.log(data);
         };
         fetchTeams();
     }, []);

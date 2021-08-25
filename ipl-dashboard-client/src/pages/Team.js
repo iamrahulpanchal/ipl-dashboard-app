@@ -20,7 +20,6 @@ export const Team = () => {
             setStatusCode(response.status);
             setTeam(data);
             setLoading(false);
-            console.log(data);
         };
         fetchMatches();
     }, [teamName]);
