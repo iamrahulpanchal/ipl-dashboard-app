@@ -1,6 +1,6 @@
 import { React, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Header } from '../components/Header';
+import './Home.css';
 
 export const Home = () => {
     
@@ -20,17 +20,30 @@ export const Home = () => {
 
     return(
         <div className="Home">
-            {/* <Link to="/"><Header /></Link> */}
-            <h3>Teams</h3>
-            {allTeams.map(team => {
-                return (
-                    <div key={team}>
-                        <Link to={teamPage + team}>
-                            <h5>{team}</h5>
-                        </Link>
-                    </div>
-                );
-            })}
+            
+            <div className="container">
+
+                <div className="row">
+                    <h3 className="all-teams-header">IPL Dashboard App</h3>
+                    <hr className="hr-tag" />
+                </div>
+
+                <div className="row">
+                    {allTeams.map(team => {
+                        return (
+                            <div key={team} className="col-md-6 col-lg-4 col-xl-4 col-sm-6 col-6 team-div">
+                                <div className="inner-team-div">
+                                    <Link to={teamPage + team}>
+                                        <h5 className="team-name">{team}</h5>
+                                    </Link>
+                                </div>
+                            </div>
+                        );
+                    })}
+                </div>
+
+            </div>
+            
         </div>
     );
 }

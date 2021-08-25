@@ -1,6 +1,5 @@
 import { React, useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import { Header } from '../components/Header';
 import { MatchDetail } from '../components/MatchDetail';
 import { NotFound } from './NotFound';
 import './Match.css';
@@ -46,8 +45,6 @@ export const Match = () => {
         loading ? <p></p> : 
 
         <div className="Match">
-
-            {/* <Link to="/"><Header /></Link> */}
 
             <div className="container">
 

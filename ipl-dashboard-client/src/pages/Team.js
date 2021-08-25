@@ -1,6 +1,5 @@
 import { React, useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import { Header } from '../components/Header';
 import { MatchDetail } from '../components/MatchDetail';
 import { MatchSmall } from '../components/MatchSmall';
 import { NotFound } from './NotFound';
@@ -37,8 +36,6 @@ export const Team = () => {
         loading ? <p></p> :
         <div className="Team">
             
-            {/* <Link to="/"><Header /></Link> */}
-
             <div className="container">
 
                 <div className="row teamNameRow">
