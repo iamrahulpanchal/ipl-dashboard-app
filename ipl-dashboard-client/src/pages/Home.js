@@ -1,5 +1,5 @@
 import { React, useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { TeamCard } from '../components/TeamCard';
 import './Home.css';
 
 export const Home = () => {
@@ -16,15 +16,13 @@ export const Home = () => {
         fetchTeams();
     }, []);
 
-    const teamPage = "/teams/";
-
     return(
         <div className="Home">
             
             <div className="container">
 
                 <div className="row">
-                    <h3 className="all-teams-header">IPL Dashboard App</h3>
+                    <h3 className="all-teams-header">IPL Mania</h3>
                     <hr className="hr-tag" />
                 </div>
 
@@ -32,11 +30,7 @@ export const Home = () => {
                     {allTeams.map(team => {
                         return (
                             <div key={team} className="col-md-6 col-lg-4 col-xl-4 col-sm-6 col-6 team-div">
-                                <div className="inner-team-div">
-                                    <Link to={teamPage + team}>
-                                        <h5 className="team-name">{team}</h5>
-                                    </Link>
-                                </div>
+                                <TeamCard team={team} />
                             </div>
                         );
                     })}
